@@ -677,7 +677,7 @@ sub CertificateAdd {
 
     # look for an available filename
     FILENAME:
-    for my $Count ( 0 .. 9 ) {
+    for my $Count ( 0 .. 99 ) {
         if ( -e "$Self->{CertPath}/$Attributes{Hash}.$Count" ) {
             next FILENAME;
         }
@@ -866,7 +866,7 @@ sub CertificateList {
 
     my @CertList;
     my @Filters;
-    for my $Number ( 0 .. 9 ) {
+    for my $Number ( 0 .. 99 ) {
         push @Filters, "*.$Number";
     }
 
@@ -1349,7 +1349,7 @@ sub PrivateList {
 
     my @CertList;
     my @Filters;
-    for my $Number ( 0 .. 9 ) {
+    for my $Number ( 0 .. 99 ) {
         push @Filters, "*.$Number";
     }
 
@@ -2197,7 +2197,7 @@ sub _NormalizePrivateSecretFiles {
         my @UsedPrivateSecretFiles;
 
         KEYFILENAME:
-        for my $Count ( 0 .. 9 ) {
+        for my $Count ( 0 .. 99 ) {
             my $PrivateKeyFileLocation = "$Self->{PrivatePath}/$Hash.$Count";
 
             # get private keys
@@ -2358,7 +2358,7 @@ sub _ReHashCertificates {
         );
 
         # split filename into Hash.Index (12345678.0 -> 12345678 / 0)
-        $File =~ m{ (.+) \. (\d) }smx;
+        $File =~ m{ (.+) \. (\d+) }smx;
         my $Hash  = $1;
         my $Index = $2;
 
@@ -2417,7 +2417,7 @@ sub _ReHashCertificates {
         my $NewPrivateKeyFile;
         my $NewIndex;
         FILENAME:
-        for my $Count ( 0 .. 9 ) {
+        for my $Count ( 0 .. 99 ) {
             my $CertTestFile = "$Self->{CertPath}/$WrongCertificate->{NewHash}.$Count";
             if ( -e $CertTestFile ) {
                 next FILENAME;
